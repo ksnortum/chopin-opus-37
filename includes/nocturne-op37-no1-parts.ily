@@ -22,6 +22,12 @@ moveArpeggioC =
   \tweak extra-spacing-width #'(-1.0 . 0)
   \etc
 
+stemLengthA = {
+  % \override Stem.length = 10
+  % \override Stem.extra-offset = #'(-1 . 1)
+  \once \override Stem.Y-extent = #'(-1 . 0)
+}
+
 %%% Music %%%
 
 global = {
@@ -268,8 +274,8 @@ rightHandLower = \relative {
   \barNumberCheck 89
   ef4 d c2 |
   r4 <b f'> <c e> <ef g~> |
-  <d g>1*1/2 \magnifyMusic #2/3 { \stemUp b4*2/7 d \stemDown b' b d b' 
-                                  b1*1/14^\fermata } |
+  <d g>1*1/4 \magnifyMusic #2/3 { \stemUp b4*3/7 d \stemDown b' b d b' 
+                                  b1*3/28^\fermata } |
 }
 
 rightHand = <<
@@ -382,10 +388,10 @@ leftHandUpper = \relative {
   
   \barNumberCheck 89
   <ef bf'>4) <bf g'> \voiceThree a'2
-  r4 g \oneVoice <c, g'>4 q |
+  r4^\blank g \oneVoice <c, g'>4 q |
   \set tieWaitForNote = ##t
   \voiceThree
-  \magnifyMusic #2/3 { g,4*2/3( g'_~ d'_~ } \voiceFour <g, d'>1*1/2)\fermata |
+  \magnifyMusic #2/3 { g,4*1/3( g'_~ d'_~ } \voiceFour <g, d'>1*3/4)\fermata |
 }
 
 leftHandLower = \relative {
@@ -696,7 +702,7 @@ ossia = \relative {
   
   \barNumberCheck 33
   s1 * 4 |
-  s4 \startStaff \grace { cs8[ d f bf] } \tuplet 3/2 { d8 c bf } 
+  s4 \startStaff \grace { cs8[ d f bf] } \tuplet 3/2 { \stemLengthA d8 c bf } 
     \stopStaff \grace { s4. } s2 |
   s1 * 3 |
   

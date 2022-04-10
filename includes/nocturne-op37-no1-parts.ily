@@ -22,11 +22,54 @@ moveArpeggioC =
   \tweak extra-spacing-width #'(-1.0 . 0)
   \etc
 
-stemLengthA = {
-  % \override Stem.length = 10
-  % \override Stem.extra-offset = #'(-1 . 1)
-  \once \override Stem.Y-extent = #'(-1 . 0)
-}
+moveSustainAOn = \override SustainPedal.Y-offset = 1
+moveSustainB = \once \override SustainPedal.X-offset = -3
+moveSustainCOn = \override SustainPedal.Y-offset = 1
+moveSustainOff = \revert SustainPedal.Y-offset
+
+moveGraceAOn = \override NoteColumn.X-offset = -1.25
+moveGraceBOn = \override NoteColumn.X-offset = -1.5
+moveGraceCOn = \override NoteColumn.X-offset = -1
+moveGraceOff = \revert NoteColumn.X-offset
+
+moveChordA = \once \override NoteColumn.X-offset = 0.25
+
+moveDynamicsA = 
+  \tweak X-offset 0
+  \tweak Y-offset 0
+  \etc
+  
+moveDynamicsB = 
+  \tweak X-offset 2
+  \tweak Y-offset 0
+  \etc
+
+slurShapeA = \shape #'((0 . 0) (0 . 0) (0 . 0.25) (0 . 1.75)) \etc
+slurShapeB = \shape #'((0 . 0) (0 . -0.75) (0 . -0.75) (0 . 0)) \etc
+slurShapeC = \shape #'((0 . 0) (0 . -1) (0 . -1) (0 . 3)) \etc
+slurShapeD = \shape #'(
+                        ()
+                        ((0 . 2) (0 . 1) (0 . 0) (0 . 0))
+                      ) \etc
+slurShapeE = \shape #'(
+                        ()
+                        ((0 . 0) (0 . -0.75) (0 . -0.75) (0 . 0))
+                      ) \etc
+slurShapeF = \shape #'((0 . 0) (0 . 0) (0 . 0.25) (0 . 1.75)) \etc
+slurShapeG = \shape #'((0 . 0) (0 . -0.5) (0 . -0.5) (0 . 2.5)) \etc
+slurShapeH = \shape #'(
+                        ()
+                        ((0 . 0) (0 . 0) (0 . 0) (0 . 2))
+                        ((0 . 7) (0 . 6) (0 . 3) (0 . 2))
+                      ) \etc
+slurShapeI = \shape #'((0 . 3) (0 . -1) (0 . -1) (0 . 3)) \etc
+slurShapeJ = \shape #'((0 . 3) (0 . 0) (0 . 0) (0 . 3)) \etc
+slurShapeK = \shape #'((0 . 2.5) (0 . -3) (0 . -3) (0 . 0)) \etc
+%slurShapeL = \shape #'((-6.5 . -8) (0 . 4) (0 . -1) (0 . 0)) \etc
+%slurShapeL = \shape #'((-10 . -8) (0 . 5) (0 . -1) (0.5 . -0.25)) \etc
+%slurShapeL = \shape #'((-9 . -9) (-3 . 6) (0 . -1) (0.5 . -0.25)) \etc
+slurShapeL = \shape #'((-9 . -8) (-6 . 6) (0 . 0) (0.5 . -0.25)) \etc
+slurPositionsA = \tweak positions #'(3 . 3) \etc
 
 %%% Music %%%
 
@@ -42,13 +85,13 @@ rightHandUpper = \relative {
   r8 bf( \tuplet 3/2 { bf8 a g } fs2->) |
   g4( a8 bf c4 d8 ef |
   a,2)~ a8.( g'16 \tuplet 3/2 { g8 f ef) } |
-  d4\( \slashedGrace { d,8_( d[ f bf] } \tuplet 3/2 { d8 c bf) }
-    \voiceOne bf8 a\) \oneVoice r4 |
-  \appoggiatura { bf,8[ d g] } \stemUp bf8^([ r16 bf] \grace { bf16[ c] }
-    \tupletDown \tuplet 3/2 { bf8^>-3 a^>-3 g^>-3 } fs4^>-3) r \stemNeutral 
-    \tupletNeutral |
+  d4\( \moveGraceAOn \slashedGrace { d,8_( d[ f bf] } \moveGraceOff 
+    \tuplet 3/2 { d8 c bf) } \voiceOne bf8 a\) \oneVoice r4 |
+  \appoggiatura { bf,8[ d g] } \stemUp bf8-\slurShapeA ^([ r16 bf] 
+    \grace { bf16[ c] } \tupletDown \tuplet 3/2 { bf8^>-3 a^>-3 g^>-3 } 
+    fs4^>-3) r \stemNeutral \tupletNeutral |
   \voiceOne
-  g4( a8. bf16 <g c>4 <fs d'> |
+  g4-\slurPositionsA ( a8. bf16 <g c>4 <fs d'> |
   \tag layout {
     g4.) \oneVoice g8( \afterGrace { \grace { g16[ a] } a2 \startTrillSpan } 
       { g16[ \stopTrillSpan a] } |
@@ -60,12 +103,16 @@ rightHandUpper = \relative {
     
   \barNumberCheck 9
   bf4 b) r8 c4->( cs8 |
-  d4 \slashedGrace { d8[ ef d cs d] d } g8. f16 f8 c4 cs8 |
+  d4 \moveGraceAOn \slashedGrace { d8[ ef d cs d] d } \moveGraceOff 
+    g8. f16 f8 c4 cs8 |
   d4 ef) r e( |
-  f4 \slashedGrace { f8[ g f e f] f } bf8. a16 a8 ds,4 e8) |
+  f4 \moveGraceAOn \slashedGrace { f8[ g f e f] f } \moveGraceOff 
+    bf8. a16 a8 ds,4 e8) |
   f4( g8. f16 ef4 bf8. c16 |
-  d4 \slashedGrace { d8 d[ f] } ef8[ r16 d] c4 g8. a16) |
-  bf4( a8. bf16 c4 \grace { c8[ d c] } b16 c d \grace { f8 } ef16)
+  d4 \moveGraceAOn \slashedGrace { d8 d[ f] } \moveGraceOff ef8[ r16 d] 
+    c4 g8. a16) |
+  bf4( a8. bf16 c4 \moveGraceAOn \grace { c8[ d c] } \moveGraceOff b16 c d 
+    \grace { f8*1/2 } ef16)
   \voiceOne
   d4.( d4 d8 \tuplet 3/2 { d8 d d } 
   
@@ -73,16 +120,17 @@ rightHandUpper = \relative {
   \oneVoice
   d4 c8. bf16 \grace { a8*1/2[ bf c] } bf8 a) r4 |
   r8 bf( \grace { bf16[ c] } \tuplet 3/2 { bf8 a g } fs4) r |
-  g4( a8 bf c4 \grace { c8[ c d c b c] } d8. ef16 |
+  g4( a8 bf c4 \moveGraceAOn \grace { c8[ c d c b c] } \moveGraceOff d8. ef16 |
   a,4) a'4.->( g8 \tuplet 3/2 { g8 f ef) } |
   
-  d4( \grace { d,8[ f bf] } \tuplet 3/2 { d8 c bf } bf8 a) r4 |
-  \grace { bf,8[_( d g] } bf8[)( r16 bf] \grace { bf16[ c] }
+  d4( \moveGraceAOn \grace { d,8[ f bf] } \moveGraceOff \tuplet 3/2 { d8 c bf }
+    bf8 a) r4 |
+  \grace { bf,8[_( d g] } bf8[)-\slurShapeC ( r16 bf] \grace { bf16*1/2[ c] }
     \tuplet 3/2 { bf8-> a-> g-> } fs4->) r |
-  g4^( a8. bf16 <g c>4 <fs d'> |
+  g4-\slurPositionsA ^( a8. bf16 <g c>4 <fs d'> |
   \tag layout {
-    g4.) \oneVoice g8( \afterGrace { \grace { g16[ a] } a2 \startTrillSpan } 
-      { g16[ \stopTrillSpan a] } |
+    g4.) \oneVoice g8-\slurShapeD ( \afterGrace { \grace { g16[ a] } a2 
+      \startTrillSpan } { g16[ \stopTrillSpan a] } |
   }
   \tag midi {
     g4. g8 \tuplet 3/2 { g32 a bf a bf a } \repeat unfold 2 { 
@@ -91,27 +139,31 @@ rightHandUpper = \relative {
   
   \barNumberCheck 25
   bf4 b) r8 c4->( cs8 |
-  d4 \slashedGrace { d8[ ef d cs d] d } g8. f16 f8 c4 cs8 |
+  d4 \moveGraceAOn \slashedGrace { d8[ ef d cs d] d } \moveGraceOff g8. f16 
+    f8 c4 cs8 |
   d4 ef) r e( |
-  f4 \slashedGrace { f8[ g f e f] f } bf8. a16 a8 ds,4 e8) |
+  f4 \moveGraceAOn \slashedGrace { f8[ g f e f] f } \moveGraceOff bf8. a16 
+    a8 ds,4 e8) |
   f4( g8. f16 ef4 bf8. c16 |
-  d4 \slashedGrace { d8 d[ f] } ef8[ r16 d] c4 g8. a16) |
-  bf4( a8. bf16 c4 \grace { c8 c d c } \tuplet 6/4 { b16 c cs d f ef) } |
+  d4 \moveGraceAOn \slashedGrace { d8 d[ f] } \moveGraceOff ef8[ r16 d] c4 
+    g8. a16) |
+  bf4( a8. bf16 c4 \moveGraceAOn \grace { c8 c d c } \moveGraceOff
+    \tuplet 6/4 { b16 c cs d f ef) } |
   \voiceOne
   d4.( d4 d8 \tuplet 3/2 { d8 d d } 
   \oneVoice
   
   \barNumberCheck 33
   d4 c8. bf16 \grace { a8*1/2[ bf c] } bf8 a) r4 |
-  r8 bf( \grace { bf16[ c] } \tuplet 3/2 { bf8 a g } fs4) r |
+  r8 bf-\slurShapeF ( \grace { bf16*1/2[ c] } \tuplet 3/2 { bf8 a g } fs4) r |
   g4( a8. bf16 c4 d8. ef16 |
   ef8 a,) r a'->~( \magnifyMusic #2/3 { 
     a8*1/4[ gs g fs f e ef c a gf e f g a bf c] } |
-  d4 \grace { cs,8[ d f] } \tuplet 3/2 { d'8 c bf } \grace { c,8*1/2[ d fs] }
-    bf8[ a]) r4 |
-  \grace { bf,8[^( d g] } bf4~ \tuplet 3/2 { bf8 a g } fs2) |
+  d4 \moveGraceAOn \grace { cs,8[ d f] } \moveGraceOff \tuplet 3/2 { d'8 c bf }
+    \moveGraceBOn \grace { c,8*1/2[ d fs] } \moveGraceOff bf8[ a]) r4 |
+  \grace { bf,8[-\slurShapeG ^( d g] } bf4~ \tuplet 3/2 { bf8 a g } fs2) |
   \voiceOne
-  g4( a8. bf16 <g c>4 <fs d'> |
+  g4-\slurPositionsA ( a8. bf16 <g c>4 <fs d'> |
   g2) r | 
   \bar "||" 
   
@@ -135,15 +187,15 @@ rightHandUpper = \relative {
   r8 bf( \tuplet 3/2 { bf8 a g } fs2) |
   g4( a8 bf c4 d8 ef |
   a,2)~ a8.( g'16 \tuplet 3/2 { g8 f ef) } |
-  d4\( \slashedGrace { d,8_( d[ f bf] } \tuplet 3/2 { d8 c bf) }
-    \voiceOne bf8 a\) \oneVoice r4 |
-  \appoggiatura { bf,8[ d g] } \stemUp bf8^([ r16 bf] \grace { bf16[ c] }
-    \tupletDown \tuplet 3/2 { bf8^>-3 a^>-3 g^>-3 } fs4^>-3) r \stemNeutral 
-    \tupletNeutral |
+  d4\( \moveGraceAOn \slashedGrace { d,8_( d[ f bf] } \moveGraceOff 
+    \tuplet 3/2 { d8 c bf) } \voiceOne bf8 a\) \oneVoice r4 |
+  \appoggiatura { bf,8[ d g] } \stemUp bf8-\slurShapeA ^([ r16 bf] 
+    \grace { bf16[ c] } \tupletDown \tuplet 3/2 { bf8^>-3 a^>-3 g^>-3 } 
+    fs4^>-3) r \stemNeutral \tupletNeutral |
     
   \barNumberCheck 73
   \voiceOne
-  g4( a8. bf16 <g c>4 <fs d'> |
+  g4-\slurPositionsA ( a8. bf16 <g c>4 <fs d'> |
   \tag layout {
     g4.) \oneVoice g8( \afterGrace { \grace { g16[ a] } a2 \startTrillSpan } 
       { g16[ \stopTrillSpan a] } |
@@ -153,14 +205,18 @@ rightHandUpper = \relative {
       \tuplet 3/2 { bf32 a bf a bf a } } \tuplet 3/2 { bf32 a bf a g a } |
   }
   bf4 b) r8 c4->( cs8 |
-  d4 \slashedGrace { d8[ ef d cs d] d } g8. f16 f8 c4 cs8 |
+  d4 \moveGraceAOn \slashedGrace { d8[ ef d cs d] d } \moveGraceOff g8. f16 
+    f8 c4 cs8 |
   d4 ef) r e( |
-  f4 \slashedGrace { f8[ g f e f] f } bf8. a16 a8 ds,4 e8) |
+  f4 \moveGraceAOn \slashedGrace { f8[ g f e f] f } \moveGraceOff bf8. a16 
+    a8 ds,4 e8) |
   f4( g8. f16 ef4 bf8. c16 |
-  d4 \slashedGrace { d8 d[ f] } ef8[ r16 d] c4 g8. a16) |
+  d4 \moveGraceAOn \slashedGrace { d8 d[ f] } \moveGraceOff ef8[ r16 d] c4 
+    g8. a16) |
   
   \barNumberCheck 81
-  bf4( a8. bf16 c4 \grace { c8[ d c] } b16 c d \grace { f8 } ef16)
+  bf4( a8. bf16 c4 \moveGraceAOn \grace { c8[ d c] } \moveGraceOff b16 c d 
+    \grace { f8 } ef16)
   \voiceOne
   d4.( d4 d8 \tuplet 3/2 { d8 d d } 
   \oneVoice
@@ -169,9 +225,10 @@ rightHandUpper = \relative {
   g4( a8. bf16 c4 d8. ef16 |
   ef8 a,) r a'->~( \magnifyMusic #2/3 { 
     a8*1/4[ gs g fs f e ef c a gf e f g a bf c] } |
-  d4 \grace { cs,8[ d f] } \tuplet 3/2 { d'8 c bf } \grace { c,8*1/2[ d fs] }
-    bf8[ a]) r4 |
-  \grace { bf,8^([ d g] } bf4 a8. g16 fs2) |
+  d4 \moveGraceCOn \grace { cs,8[ d f] } \moveGraceOff \tuplet 3/2 { d'8 c bf }
+    \moveGraceBOn \grace { c,8*1/2[ d fs] } \moveGraceOff \stemDown bf8[ a]) 
+    \stemNeutral r4 |
+  \grace { bf,8*1/2^([ d g] } bf4 a8. g16 fs2) |
   \voiceOne
   g4( a8. bf16 <g c>4 <fs d'> |
   g2.-> c8. b16 |
@@ -227,13 +284,13 @@ rightHandLower = \relative {
     <af, d f>4 <g ef'>) |
   
   \barNumberCheck 49
-  <bf ef g>4( <g d' g> <c ef g> <a d fs> |
+  <bf ef g>4-\slurShapeH ( <g d' g> <c ef g> <a d fs> |
   <c f>4 <d f> <bf d bf'> <c e g> |
   <c f af>4 <df f bf> <bf e g> <af f'> |
   <c f af>4 \grace { c'8 } <df, f bf>4 <bf e g> <af_~ f'> |
   <af c ef>4 <g c ef> <g bf ef> <f bf d> |
   <a d>4 <bf d> <g bf d g> \staffDown <e a cs> |
-  <fs a d>4 <g c ef> q <f af d> |
+  <fs a d>4 <g c ef> q <fs a d> |
   <fs a d>4 <g c ef> <f af c> <d f bf>)
   
   \barNumberCheck 57
@@ -244,14 +301,17 @@ rightHandLower = \relative {
   <bf d f>4 <g c ef> \grace { g'8-\moveArpeggioA \arpeggio } 
     <af, d f>4 <g ef'> |
   \staffDown
-  <g bf>4 <ef af c> q <ef g bf>)\fermata |
-  <ef af c>4( <g bf ef> <f bf d> <g bf ef>)\fermata |
+  <g bf>4 <ef af c> q \tag midi { \tempo 4 = 20 } <ef g bf>)\fermata |
+    \tag midi { \tempo 4 = 72 }
+  <ef af c>4( <g bf ef> <f bf d> \tag midi { \tempo 4 = 20 } 
+    <g bf ef>)\fermata | \tag midi { \tempo 4 = 72 }
   \staffUp
-  <bf d f>4( <df ef g> \grace { bf'8-\moveArpeggioB \arpeggio } 
-    <c, ef af>4 <bf e g>)\fermata |
-  <af c f>4( <g c ef> \grace { g'8-\moveArpeggioC \arpeggio } 
-    <af, c f>4 <g c ef>)\fermata |
-    
+  <bf d f>4-\slurShapeI ( <df ef g> \grace { bf'8-\moveArpeggioB \arpeggio } 
+    <c, ef af>4 \tag midi { \tempo 4 = 30 } <bf e g>)\fermata | 
+    \tag midi { \tempo 4 = 72 }
+  <af c f>4-\slurShapeJ ( <g c ef> \grace { g'8-\moveArpeggioC \arpeggio } 
+    <af, c f>4 \tag midi { \tempo 4 = 20 } <g c ef>)\fermata | 
+    \tag midi { \tempo 4 = 72 }
   \barNumberCheck 65
   \voiceTwo
   d'1~\arpeggio |
@@ -274,8 +334,8 @@ rightHandLower = \relative {
   \barNumberCheck 89
   ef4 d c2 |
   r4 <b f'> <c e> <ef g~> |
-  <d g>1*1/4 \magnifyMusic #2/3 { \stemUp b4*3/7 d \stemDown b' b d b' 
-                                  b1*3/28^\fermata } |
+  <d g>1*1/4 \magnifyMusic #2/3 { \stemUp b4*3/7-\slurShapeL ^( d \stemDown 
+                                  b' b d b' b1*3/28)^\fermata } |
 }
 
 rightHand = <<
@@ -300,7 +360,7 @@ leftHandUpper = \relative {
   
   \barNumberCheck 9
   \voiceFour
-  <bf d>4^( f' <a, ef'> <f_~ f'> |
+  <bf d>4-\slurShapeB ^( f' <a, ef'> <f_~ f'> |
   <f bf d>4 f' <a, ef'> <f f'> |
   \voiceThree
   f'4 g2 g4 |
@@ -319,7 +379,7 @@ leftHandUpper = \relative {
   <bf,, bf'>4( f'' d, d')~ |
   <g, d'>4( <d' d'> <a' c ef> <d, d'> |
   <ef bf'>4) <bf g'> \voiceThree a'2 \oneVoice
-  s4 <g d'> f, <f' c' ef f>( |
+  s4 <g d'> f, <f' c' ef f>-\slurShapeE ( |
   
   \barNumberCheck 25
   \voiceFour
@@ -367,7 +427,7 @@ leftHandUpper = \relative {
   <ef bf'>4) <bf g'> \voiceThree a'2 \oneVoice |
   s4 <g d'> f, <f' c' ef f> |
   \voiceFour
-  <bf d>4^( f' <a, ef'> <f_~ f'> |
+  <bf d>4-\slurShapeB ^( f' <a, ef'> <f_~ f'> |
   <f bf d>4 f' <a, ef'> <f f'> |
   \voiceThree
   f'4 g2 g4 |
@@ -378,12 +438,12 @@ leftHandUpper = \relative {
   
   \barNumberCheck 81
   g,4 <g' bf d> ef, <g' c g'> |
-  d,4 \clef treble <a'' fs'>( <bf g'> <b gs'>8 <c a'>) \clef bass |
+  d,4 \clef treble \moveChordA <a'' fs'>( <bf g'> <b gs'>8 <c a'>) \clef bass |
   g,,4( <d'' d'> <fs c' ef> <d d'> |
   <g bf ef>4 <d d'> <a' c ef> <d, d'>) |
   g,4 <g' bf d> c,, <g'' c ef g> |
-  f,4( <ef'' g> <d f> <c ef> |
-  <bf,, bf'>4) f'' d, d'~ |
+  f,4-\slurShapeK ( <ef'' g> <d f> <c ef> |
+  <bf,, bf'>4) f'' d, d'->~ |
   <g, d'>4( <d' d'> <a' c ef> <d, d'> |
   
   \barNumberCheck 89
@@ -391,7 +451,7 @@ leftHandUpper = \relative {
   r4^\blank g \oneVoice <c, g'>4 q |
   \set tieWaitForNote = ##t
   \voiceThree
-  \magnifyMusic #2/3 { g,4*1/3( g'_~ d'_~ } \voiceFour <g, d'>1*3/4)\fermata |
+  \magnifyMusic #2/3 { g,4*1/3 g'_~ d'_~ } \voiceFour <g, d'>1*3/4\fermata |
 }
 
 leftHandLower = \relative {
@@ -459,7 +519,7 @@ leftHandLower = \relative {
   <f, c'>4 <c c'> <f c'> <c c'>\fermata |
   
   \barNumberCheck 65
-  <fs, f' d' a'>1\arpeggio |
+  <fs, fs' d' a'>1\arpeggio |
   \oneVoice
   R1 |
   \key g \minor
@@ -479,7 +539,7 @@ leftHandLower = \relative {
   s1 * 8 |
   
   \barNumberCheck 89
-  s2 <a, e'>4 d |
+  s2 <a, ef'>4 d |
   g,2 s |
   s1 |
 }
@@ -575,12 +635,12 @@ dynamics = {
   s4 s2.\<  |
   s1\p |
   s1 * 3 |
-  s1\pp |
+  s1-\moveDynamicsA \pp |
   s1 
   
   \barNumberCheck 89
   s1 * 2 |
-  s1\pp |
+  s1-\moveDynamicsB \pp |
 }
 
 pedal = {
@@ -589,23 +649,28 @@ pedal = {
   s1 |
   s2\sustainOn s\sustainOff\sustainOn |
   s2\sustainOff\sustainOn s\sustainOff |
-  s2\sustainOn s4.\sustainOff\sustainOn s8\sustainOff |
+  \moveSustainAOn 
+  \moveSustainB s2\sustainOn s4.\sustainOff\sustainOn s8\sustainOff |
   s2\sustainOn s\sustainOff |
   s1 |
   s2\sustainOn s4.\sustainOff\sustainOn s16 s\sustainOff |
+  \moveSustainOff 
   
   \barNumberCheck 9
   s1 * 4 |
+  \moveSustainCOn
   s2\sustainOn s\sustainOff\sustainOn |
   s2\sustainOff\sustainOn s\sustainOff\sustainOn |
   s2\sustainOff\sustainOn s\sustainOff\sustainOn |
-  s2\sustainOff\sustainOn s\sustainOff |
+  s2\sustainOff\sustainOn \moveSustainOff s\sustainOff |
   
   \barNumberCheck 17
-  s2\sustainOn s\sustainOff |
+  \moveSustainAOn 
+  \moveSustainB s2\sustainOn s\sustainOff |
   s1 |
   s2\sustainOn s\sustainOff\sustainOn |
   s2\sustainOff\sustainOn s\sustainOff |
+  \moveSustainOff
   s2\sustainOn s\sustainOff\sustainOn |
   s2\sustainOff\sustainOn s\sustainOff |
   s1 |
@@ -613,16 +678,19 @@ pedal = {
   
   \barNumberCheck 25
   s1 * 4 |
+  \moveSustainCOn
   s2\sustainOn s\sustainOff\sustainOn |
   s2\sustainOff\sustainOn s\sustainOff\sustainOn |
   s2\sustainOff\sustainOn s\sustainOff\sustainOn |
-  s2\sustainOff\sustainOn s\sustainOff |
+  s2\sustainOff\sustainOn \moveSustainOff s\sustainOff |
   
   \barNumberCheck 33
-  s2\sustainOn s\sustainOff |
+  \moveSustainAOn 
+  \moveSustainB s2\sustainOn s\sustainOff |
   s1 |
   s2\sustainOn s\sustainOff\sustainOn |
   s2\sustainOff\sustainOn s\sustainOff |
+  \moveSustainOff
   s2\sustainOn s\sustainOff\sustainOn |
   s2\sustainOff\sustainOn s\sustainOff |
   s1 * 2 |
@@ -639,10 +707,12 @@ pedal = {
   \barNumberCheck 65
   s1\sustainOn |
   s2. s8. s16\sustainOff |
-  s2\sustainOn s\sustainOff |
+  \moveSustainAOn 
+  \moveSustainB s2\sustainOn s\sustainOff |
   s1 |
   s2\sustainOn s\sustainOff\sustainOn |
   s2\sustainOff\sustainOn s\sustainOff |
+  \moveSustainOff
   s2\sustainOn s\sustainOff\sustainOn |
   s2\sustainOff\sustainOn s\sustainOff |
   
@@ -657,7 +727,7 @@ pedal = {
   \barNumberCheck 81
   s2\sustainOff\sustainOn s\sustainOff\sustainOn |
   s2\sustainOff\sustainOn s\sustainOff |
-  s2\sustainOn s2\sustainOff |
+  \moveSustainB s2\sustainOn s2\sustainOff |
   s1 |
   s2\sustainOn s\sustainOff\sustainOn |
   s2\sustainOff\sustainOn s\sustainOff |
@@ -702,7 +772,7 @@ ossia = \relative {
   
   \barNumberCheck 33
   s1 * 4 |
-  s4 \startStaff \grace { cs8[ d f bf] } \tuplet 3/2 { \stemLengthA d8 c bf } 
+  s4 \startStaff \grace { cs8[ d f bf] } \tuplet 3/2 { d8 c bf } 
     \stopStaff \grace { s4. } s2 |
   s1 * 3 |
   
@@ -725,13 +795,13 @@ ossia = \relative {
   s1 |
   \startStaff 
   << 
-    { \voiceOne d4 d4. d8 \tuplet 3/2 { d8 d d } | } 
+    { \voiceOne d4~ d4. d8 \tuplet 3/2 { d8 d d } | } 
     \\ 
     { \voiceTwo r8 d,2.. | } 
   >>
   \stopStaff
   s1 * 4
-  s4 \startStaff \grace { cs8[ d f bf] } \tuplet 3/2 { d8 c bf } 
+  s4 \startStaff \grace { cs8[ d f bf] } \tuplet 3/2 { d8 c! bf } 
     \stopStaff \grace { s4. } s2 |
 }
 
@@ -779,6 +849,23 @@ nocturneOneLayout = \layout {
     \Score
     % \omit BarNumber
     \override Slur.details.free-head-distance = 1
+  }
+  \context {
+     \Staff
+     \consists
+       #(lambda (context)
+          (let ((beam #f)
+                (staff-symbol #f))
+            (make-engraver
+             (acknowledgers
+              ((beam-interface engraver grob source-engraver)
+               (set! beam grob))
+              ((staff-symbol-interface engraver grob source-engraver)
+               (set! staff-symbol grob)))
+             ((stop-translation-timestep engraver)
+              (if (and beam staff-symbol)
+                  (ly:grob-set-object! beam 'staff-symbol staff-symbol))
+              (set! beam #f)))))
   }
 }
 

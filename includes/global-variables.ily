@@ -11,13 +11,3 @@ dimm = \markup \large \italic "dim."
 blank = \markup \large " "
 
 % Scheme functions
-
-forceStemLength = 
-#(define-music-function (sl music) (real? ly:music?)
-  #{
-    \override Stem.stemlet-length = $sl
-    %\override Stem.details.beamed-lengths = #'(6.0)
-    $music
-    \revert Stem.stemlet-length
-    %\revert Stem.details.beamed-lengths
-  #})

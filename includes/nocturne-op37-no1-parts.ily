@@ -97,8 +97,7 @@ rightHandUpper = \relative {
       { g16[ \stopTrillSpan a] } |
   }
   \tag midi {
-    g4. g8 \tuplet 3/2 { g32 a bf a bf a } \repeat unfold 2 { 
-      \tuplet 3/2 { bf32 a bf a bf a } } \tuplet 3/2 { bf32 a bf a g a } |
+    g4. g16 g32 a \repeat unfold 7 { bf32 a } g32 a |
   }
     
   \barNumberCheck 9
@@ -133,8 +132,7 @@ rightHandUpper = \relative {
       \startTrillSpan } { g16[ \stopTrillSpan a] } |
   }
   \tag midi {
-    g4. g8 \tuplet 3/2 { g32 a bf a bf a } \repeat unfold 2 { 
-      \tuplet 3/2 { bf32 a bf a bf a } } \tuplet 3/2 { bf32 a bf a g a } |
+    g4. g16 g32 a \repeat unfold 7 { bf32 a } g32 a |
   }
   
   \barNumberCheck 25
@@ -201,8 +199,7 @@ rightHandUpper = \relative {
       { g16[ \stopTrillSpan a] } |
   }
   \tag midi {
-    g4. g8 \tuplet 3/2 { g32 a bf a bf a } \repeat unfold 2 { 
-      \tuplet 3/2 { bf32 a bf a bf a } } \tuplet 3/2 { bf32 a bf a g a } |
+    g4. g16 g32 a \repeat unfold 7 { bf32 a } g32 a |
   }
   bf4 b) r8 c4->( cs8 |
   d4 \moveGraceAOn \slashedGrace { d8[ ef d cs d] d } \moveGraceOff g8. f16 

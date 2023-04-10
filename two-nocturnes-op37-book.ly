@@ -7,7 +7,7 @@
 \include "includes/header-paper.ily"
 \include "includes/title-page.ily"
 \include "includes/nocturne-op37-no1-parts.ily"
-% \include "includes/nocturne-op37-no2-parts.ily"
+\include "includes/nocturne-op37-no2-parts.ily"
 
 nocturneOne = \bookpart {
   \tocItem \markup { 
@@ -21,10 +21,9 @@ nocturneOne = \bookpart {
   }
 }
 
-%{
 nocturneTwo = \bookpart {
   \tocItem \markup { 
-    \concat { "Nocturne No. 8 in D" \raise #0.75 \teeny \flat " major" }
+    \concat { "Nocturne No. 12 in G major" }
   }
   \nocturneTwoHeader
   \score {
@@ -33,7 +32,6 @@ nocturneTwo = \bookpart {
     \nocturneTwoLayout
   }
 }
-%}
 
 %%% ------------------
 %%% Construct the book
@@ -46,11 +44,11 @@ nocturneTwo = \bookpart {
 \pageBreak
 
 \nocturneOne
-% \nocturneTwo
+\nocturneTwo
 
 %%% ----
 %%% MIDI
 %%% ----
 
 \nocturneOneMidi
-% \nocturneTwoMidi
+\nocturneTwoMidi

@@ -65,9 +65,6 @@ slurShapeH = \shape #'(
 slurShapeI = \shape #'((0 . 3) (0 . -1) (0 . -1) (0 . 3)) \etc
 slurShapeJ = \shape #'((0 . 3) (0 . 0) (0 . 0) (0 . 3)) \etc
 slurShapeK = \shape #'((0 . 2.5) (0 . -3) (0 . -3) (0 . 0)) \etc
-%slurShapeL = \shape #'((-6.5 . -8) (0 . 4) (0 . -1) (0 . 0)) \etc
-%slurShapeL = \shape #'((-10 . -8) (0 . 5) (0 . -1) (0.5 . -0.25)) \etc
-%slurShapeL = \shape #'((-9 . -9) (-3 . 6) (0 . -1) (0.5 . -0.25)) \etc
 slurShapeL = \shape #'((-9 . -8) (-6 . 6) (0 . 0) (0.5 . -0.25)) \etc
 slurPositionsA = \tweak positions #'(3 . 3) \etc
 
@@ -741,8 +738,6 @@ ossia = \relative {
   \stopStaff
   \partial 4 s4
   s1 * 8 |
-  % \hideNotes f''4( \unHideNotes \startStaff ef8) ef8*1/2([ 
-  %   s16\turn f8*1/2 \hideNotes gf8*1/2)] \unHideNotes \stopStaff s8 |
   
   \barNumberCheck 9
   s1 * 7 |
@@ -844,25 +839,14 @@ nocturneOneHeader = \header {
 nocturneOneLayout = \layout {
   \context {
     \Score
-    % \omit BarNumber
+    \omit BarNumber
     \override Slur.details.free-head-distance = 1
   }
+  % Needed for the ossia beaming problem
   \context {
      \Staff
      \consists
-       #(lambda (context)
-          (let ((beam #f)
-                (staff-symbol #f))
-            (make-engraver
-             (acknowledgers
-              ((beam-interface engraver grob source-engraver)
-               (set! beam grob))
-              ((staff-symbol-interface engraver grob source-engraver)
-               (set! staff-symbol grob)))
-             ((stop-translation-timestep engraver)
-              (if (and beam staff-symbol)
-                  (ly:grob-set-object! beam 'staff-symbol staff-symbol))
-              (set! beam #f)))))
+       \ossiaBeaming
   }
 }
 
@@ -870,8 +854,8 @@ nocturneOneMusic = <<
   \new Staff = "ossia" \with {
     \remove "Time_signature_engraver"
     \hide Clef
+    \omit KeySignature
     \override BarLine.allow-span-bar = ##f
-    \override KeySignature.stencil = ##f
     \magnifyStaff #2/3
     \override VerticalAxisGroup.staff-staff-spacing = 
       #'((basic-distance . 0) 

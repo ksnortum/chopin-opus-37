@@ -15,20 +15,21 @@
   markup-system-spacing = 
     #'((basic-distance . 1)
        (padding . 0.5)) % defaults: 1, 0.5
-    
+
   system-system-spacing =
-    #'((basic-distance . 6) 
-       (minimum-distance . 4)
+    #'((basic-distance . 0) 
+       (minimum-distance . 0)
        (padding . 2)
-       (stretchability . 40)) % defaults: 12, 8, 1, 60
-      
+       (stretchability . 60)) % defaults: 12, 8, 1, 60
+
   last-bottom-spacing = 
-    #'((basic-distance . 2)
-       (minimum-distance . 1)
-       (padding . 2)
+    #'((basic-distance . 0)
+       (minimum-distance . 0)
+       (padding . 3)
        (stretchability . 30)) % defaults 1, 0, 1, 30
     
   top-system-spacing.minimum-distance = 10
+  min-systems-per-page = 5
     
   #(set-paper-size "letter")
   

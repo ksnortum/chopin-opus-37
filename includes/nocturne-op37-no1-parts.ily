@@ -22,6 +22,11 @@ moveArpeggioC =
   \tweak extra-spacing-width #'(-1.0 . 0)
   \etc
 
+moveArpeggioD = 
+  \tweak positions #'(-3 . 0.5) 
+  \tweak extra-spacing-width #'(-1.0 . 0)
+  \etc
+
 moveSustainAOn = \override SustainPedal.Y-offset = 1
 moveSustainB = \once \override SustainPedal.X-offset = -3
 moveSustainCOn = \override SustainPedal.Y-offset = 1
@@ -281,7 +286,8 @@ rightHandLower = \relative {
   <bf ef g>4-\slurShapeH ( <g d' g> <c ef g> <a d fs> |
   <c f>4 <d f> <bf d bf'> <c e g> |
   <c f af>4 <df f bf> <bf e g> <af f'> |
-  <c f af>4 \grace { c'8 } <df, f bf>4 <bf e g> <af_~ f'> |
+  <c f af>4 \slashedGrace { c'8 \moveArpeggioD \arpeggio } <df, f bf>4 <bf e g>
+    <af_~ f'> |
   <af c ef>4 <g c ef> <g bf ef> <f bf d> |
   <a d>4 <bf d> <g bf d g> \staffDown <e a cs> |
   <fs a d>4 <g c ef> q <fs a d> |
@@ -292,7 +298,7 @@ rightHandLower = \relative {
   <ef_~ af c>4 <ef g bf ef> <f bf d> <g bf ef> |
   \staffUp
   <bf d f>4 <bf ef g> <c ef af> <bf ef g> |
-  <bf d f>4 <g c ef> \grace { g'8-\moveArpeggioA \arpeggio } 
+  <bf d f>4 <g c ef> \slashedGrace { g'8-\moveArpeggioA \arpeggio } 
     <af, d f>4 <g ef'> |
   \staffDown
   <g bf>4 <ef af c> q \tag midi { \tempo 4 = 20 } <ef g bf>)\fermata |
@@ -300,10 +306,12 @@ rightHandLower = \relative {
   <ef af c>4( <g bf ef> <f bf d> \tag midi { \tempo 4 = 20 } 
     <g bf ef>)\fermata | \tag midi { \tempo 4 = 72 }
   \staffUp
-  <bf d f>4-\slurShapeI ( <df ef g> \grace { bf'8-\moveArpeggioB \arpeggio } 
+  <bf d f>4-\slurShapeI ( <df ef g> 
+    \slashedGrace { bf'8-\moveArpeggioB \arpeggio } 
     <c, ef af>4 \tag midi { \tempo 4 = 30 } <bf e g>)\fermata | 
     \tag midi { \tempo 4 = 72 }
-  <af c f>4-\slurShapeJ ( <g c ef> \grace { g'8-\moveArpeggioC \arpeggio } 
+  <af c f>4-\slurShapeJ ( <g c ef> 
+    \slashedGrace { g'8-\moveArpeggioC \arpeggio } 
     <af, c f>4 \tag midi { \tempo 4 = 20 } <g c ef>)\fermata | 
     \tag midi { \tempo 4 = 72 }
   \barNumberCheck 65
@@ -393,7 +401,7 @@ leftHandUpper = \relative {
   <g bf ef>4 <d d'> <a' c ef> <d, d'>) |
   g,4 <g' bf d> c,, <g'' c ef g> |
   f,4( <ef'' g> <d f> <c ef> |
-  <bf,, bf'>4) f'' d, d'~ |
+  <bf,, bf'>4) f'' d, d'->~ |
   <g, d'>4( <d' d'> <a' c ef> <d, d'> |
   <ef bf'>4) <bf g'> \voiceThree a'2 |
   s4 d, d d |
@@ -412,7 +420,7 @@ leftHandUpper = \relative {
   \oneVoice
   <g,, g'>4( <d'' d'> <fs c' ef> <d d'> |
   <g bf ef>4 <d d'> <a' c ef> <d, d'>) |
-  g,4 <g' bf d> c,, <g'' c ef g> |
+  g,4( <g' bf d> c,, <g'' c ef g>) |
   f,4( <ef'' g>\> <d f> <c ef>)\! |
   <bf,, bf'>4( f'' d, d')~ |
   <g, d'>( <d' d'> <a' c ef> <d, d'> |

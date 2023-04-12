@@ -54,6 +54,8 @@ moveAccidentalB = \once \override Accidental.X-extent = #'(-0.5 . 0)
 moveDynamicsA = \tweak X-offset -0.5 \etc
 moveGraceA = \tweak NoteColumn.X-offset 1 \etc
 
+moveDotsUp = \once \override Dots.extra-offset = #'(0 . 1)
+
 slurShapeA = \shape #'(
                         ((0 . 0.25) (0 . 0) (0 . -0.25) (0 . -0.75))
                         ((0 . 0) (0 . 0) (0 . 0) (0 . 0))
@@ -120,7 +122,7 @@ rightHandUpper = \relative {
   <af f'>16) <c' af'>([ <bf g'> <g e'> <af f'> <bf df>]
     <af c> <g ef'> <f df'> <ef g> <df af'> <bf bf'> |
   \voiceOne
-  gf'8) \oneVoice r r r <c, ef>16^( <d f> <c gf'> <af af'> |
+  gf'8) \oneVoice r r r <c, ef>16^( <df f> <c gf'> <af af'> |
   \voiceOne 
   e'8) \oneVoice r r r <as, cs>16^( <b d> <as e'> <fs fs'> |
   g'4.) g4^( a8 |
@@ -239,7 +241,7 @@ rightHandUpper = \relative {
   a4 a,8 a'4 fs'8 |
   fs4 e8 d4 b8 |
   a4. a4 b8 |
-  a4. a4 b8 |
+  a4 a,8 a'4 b8 |
   
   \barNumberCheck 113
   a4 a,8 a'4 d8 |
@@ -427,8 +429,8 @@ rightHandLower = \relative {
   <fs as>4. q4 as8 |
   << 
     { 
-      \voiceFour \tieWait \grace { \stemUp b8 \slurShapeB ^([ b~ ds~] } 
-        \stemDown <b ds>2.) |
+      \voiceFour \tieWait \grace { \stemUp b8 \slurShapeB ^([ b~ ds^~] } 
+        \stemDown \moveDotsUp <b ds>2.) |
     } 
     \\ 
     { 
@@ -579,7 +581,7 @@ leftHandUpper = \relative {
   \barNumberCheck 89
   <e gs>4. q |
   \slashedGrace { e8 \tweakArpeggioA \arpeggio } <e gs>2.*2/3 s8 gs_~ |
-  <ds \single \omit Accidental gs bs>2 r4 |
+  <ds \single \omit Accidental gs bs>2 d4\rest |
   <fss cs'>4. q |
   <gs bs> q4 r8 |
   s2. * 2 |
@@ -677,7 +679,7 @@ leftHandLower = \relative {
   \barNumberCheck 89
   <e, e'>2. |
   <cs' gs'>2. |
-  <gs gs'>2. |
+  <gs gs'>2 s4 |
   <ds ds'>2. |
   <gs gs'>2. |
   \oneVoice
@@ -886,7 +888,7 @@ dynamics = {
   s16 s\! s4 s8 s4\< |
   s16 s\! s4\< s16 s\! s4\> |
   s16 s\! s4 s4. |
-  s4. s\p\< |
+  s4. s\pp\< |
   s2. |
   s4. s4\! s8\> |
   s2. |
@@ -1011,6 +1013,40 @@ ossia = \relative {
   \stopStaff
 }
 
+forceBreaks = {
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 2 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\pageBreak
+  
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 6 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 5 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 5 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 5 { s2.\noBreak } s2.\pageBreak
+  
+  \repeat unfold 5 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 6 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 2 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 2 { s2.\noBreak } s2.\pageBreak
+  
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 6 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 5 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 6 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 7 { s2.\noBreak } s2.\pageBreak
+  
+  \repeat unfold 5 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 4 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 3 { s2.\noBreak } s2.\break\noPageBreak
+  \repeat unfold 6 { s2.\noBreak } s2.\pageBreak
+}
+
 nocturneTwoHeader = \header { 
   title = "Nocturnes"
   composer = "Frédéric Chopin (1810-1849)"
@@ -1065,6 +1101,7 @@ nocturneTwoMusic = <<
     \new Dynamics \dynamics
     \new Staff = "lower" \leftHand
     \new Dynamics \pedal
+    \new Devnull \forceBreaks
   >>
 >>
 

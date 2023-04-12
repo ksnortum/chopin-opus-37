@@ -46,3 +46,10 @@
   
   tocItemMarkup = \tocItemWithDotsMarkup
 }
+
+\layout {
+  \context {
+    \Voice
+    \override Tie.minimum-length = 3
+  }
+}

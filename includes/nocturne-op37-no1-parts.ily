@@ -833,58 +833,47 @@ forceBreaks = {
   %{ 88 %} \grace { s4.} 
 }
 
-nocturneOneHeader = \header { 
-  title = "Nocturnes"
-  composer = "Frédéric Chopin (1810-1849)"
-  opus = "Opus 37, No 1"
-  copyright = \markup { 
-    "This work is licensed under a" 
-    \with-url #"https://creativecommons.org/licenses/by-sa/4.0/" 
-    "Creative Commons Attribution-ShareAlike 4.0 License" 
+nocturneOneMusic = \score {
+  \header {
+    opus = "Opus 37, No 1"
   }
-}
-
-nocturneOneLayout = \layout {
-  \context {
-    \Score
-    \omit BarNumber
-    \override Slur.details.free-head-distance = 1
-  }
-  % Needed for the ossia beaming problem
-  \context {
-     \Staff
-     \consists
-       \ossiaBeaming
-  }
-}
-
-nocturneOneMusic = <<
-  \new Staff = "ossia" \with {
-    \remove "Time_signature_engraver"
-    \hide Clef
-    \omit KeySignature
-    \override BarLine.allow-span-bar = ##f
-    \magnifyStaff #2/3
-    \override VerticalAxisGroup.staff-staff-spacing = 
-      #'((basic-distance . 0) 
-        (minimum-distance . 0)
-        (padding . 1)
-        (stretchability . 0))
-  } {
-    \ossia
-  }  
-  \new PianoStaff \with { 
-    instrumentName = \markup \huge "No. 11" 
-    tempoHideNote = ##t
-  } <<
-    \set PianoStaff.connectArpeggios = ##t
-    \new Staff = "upper" \rightHand
-    \new Dynamics \dynamics
-    \new Staff = "lower" \leftHand
-    \new Dynamics \pedal
-    \new Devnull \forceBreaks
+  \keepWithTag layout
+  <<
+    \new Staff = "ossia" \with {
+      \remove "Time_signature_engraver"
+      \hide Clef
+      \omit KeySignature
+      \override BarLine.allow-span-bar = ##f
+      \magnifyStaff #2/3
+      \override VerticalAxisGroup.staff-staff-spacing = 
+        #'((basic-distance . 0) 
+          (minimum-distance . 0)
+          (padding . 1)
+          (stretchability . 0))
+    } {
+      \ossia
+    }  
+    \new PianoStaff \with { 
+      instrumentName = \markup \huge "No. 11" 
+      tempoHideNote = ##t
+      connectArpeggios = ##t
+    } <<
+      \new Staff = "upper" \rightHand
+      \new Dynamics \dynamics
+      \new Staff = "lower" \leftHand
+      \new Dynamics \pedal
+      \new Devnull \forceBreaks
+    >>
   >>
->>
+  \layout {
+    % Needed for the ossia beaming problem
+    \context {
+       \Staff
+       \consists
+         \ossiaBeaming
+    }
+  }
+}
 
 nocturneOneMidi = \book {
   \bookOutputName "nocturne-op37-no1"
@@ -894,15 +883,6 @@ nocturneOneMidi = \book {
       \new Staff = "upper" << \rightHand \dynamics \pedal >>
       \new Staff = "lower" << \leftHand \dynamics \pedal >>
     >>
-    \midi {
-      \context {
-        \Staff
-        \consists "Dynamic_performer"
-      }
-      \context {
-        \Voice
-        \remove "Dynamic_performer"
-      }    
-    }
+    \midi {}
   }
 }

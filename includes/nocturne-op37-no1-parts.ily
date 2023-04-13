@@ -43,11 +43,16 @@ moveDynamicsA =
   \tweak X-offset 0
   \tweak Y-offset 0
   \etc
-  
+
+% Dynamic to the right of the slur
+moveDynamicsB = \tweak X-offset 2 \etc
+
+%{ Dynamic to left of slur
 moveDynamicsB = 
   \tweak X-offset 2
-  \tweak Y-offset 0
+  \tweak extra-offset #'(-3 . 1.5) 
   \etc
+%}
 
 slurShapeA = \shape #'((0 . 0) (0 . 0) (0 . 0.25) (0 . 1.75)) \etc
 slurShapeB = \shape #'((0 . 0) (0 . -0.75) (0 . -0.75) (0 . 0)) \etc
@@ -70,7 +75,7 @@ slurShapeH = \shape #'(
 slurShapeI = \shape #'((0 . 3) (0 . -1) (0 . -1) (0 . 3)) \etc
 slurShapeJ = \shape #'((0 . 3) (0 . 0) (0 . 0) (0 . 3)) \etc
 slurShapeK = \shape #'((0 . 2.5) (0 . -3) (0 . -3) (0 . 0)) \etc
-slurShapeL = \shape #'((-9 . -8) (-6 . 6) (0 . 0) (0.5 . -0.25)) \etc
+slurShapeL = \shape #'((-9 . -8) (-6 . 3) (0 . 0) (0.5 . -0.25)) \etc
 slurPositionsA = \tweak positions #'(3 . 3) \etc
 
 %%% Music %%%
@@ -319,7 +324,6 @@ rightHandLower = \relative {
   d'1~\arpeggio |
   d1 |
   s1 * 4 |
-  \set tieWaitForNote = ##t
   s2 \stemUp \grace { c8*1/2~ d~ fs~ } \stemDown <c d fs>4 s4 |
   s1 |
   
@@ -830,7 +834,7 @@ forceBreaks = {
   %{ 75 %} \repeat unfold 4 { s1\noBreak } s1\noPageBreak\break
   %{ 80 %} \repeat unfold 3 { s1\noBreak } s1\noPageBreak\break
   %{ 84 %} \repeat unfold 3 { s1\noBreak } s1\noPageBreak\break
-  %{ 88 %} \grace { s4.} 
+  %{ 88 %} \grace { s4. } \repeat unfold 3 { s1\noBreak } s1\pageBreak
 }
 
 nocturneOneMusic = \score {
@@ -855,7 +859,6 @@ nocturneOneMusic = \score {
     }  
     \new PianoStaff \with { 
       instrumentName = \markup \huge "No. 11" 
-      tempoHideNote = ##t
       connectArpeggios = ##t
     } <<
       \new Staff = "upper" \rightHand

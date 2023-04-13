@@ -45,6 +45,7 @@ moveTextA =
   \tweak X-offset -7
   \tweak Y-offset 2
   \etc
+
 moveNoteA = \once \override NoteColumn.force-hshift = -0.6
 moveNoteB = \tweak NoteColumn.X-offset 1 \etc
 moveNoteC = \tweak NoteColumn.X-offset 1 \etc
@@ -61,6 +62,7 @@ slurShapeA = \shape #'(
                         ((0 . 0) (0 . 0) (0 . 0) (0 . 0))
                       ) \etc
 slurShapeB = \shape #'((0 . 0) (0 . 0) (0 . 1) (1.5 . 2)) \etc
+slurShapeC = \shape #'((0 . 0) (0 . -2) (0 . -2) (0 . 0)) \etc
 
 tieWait = \set tieWaitForNote = ##t
 
@@ -74,7 +76,7 @@ global = {
 
 rightHandUpper = \relative {
   r4 r8 <fs' a>8( <g b>16 <a c> <as cs> <c e> |
-  <b d>4) r8 <fs a>8( <g b>16 <a c> <as cs> <c e> |
+  <b d>4) r8 <fs a>8\slurShapeC ( <g b>16 <a c> <as cs> <c e> |
   <b d>16 <e c'> <d b'> <c fs> <b g'> <c e>  
     <b d> <a f'> <gs e'> <f a> <e b'> <d c'> |
   <c e>4) r8 <a' c>8( <gs b>16 <a c> <b d> <gs f'> |
@@ -1066,9 +1068,9 @@ nocturneTwoMusic = \score {
           (stretchability . 20))
     } {
       \ossia
-    }  
+    }
     \new PianoStaff \with { 
-      instrumentName = \markup \huge "No. 12" 
+      instrumentName = \markup \huge "No. 12"
       \override VerticalAxisGroup.staff-staff-spacing =
       #'((basic-distance . 0)
          (minimum-distance . 0)

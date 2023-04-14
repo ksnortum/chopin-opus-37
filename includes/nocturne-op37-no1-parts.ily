@@ -1,6 +1,6 @@
 %...+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....
 
-\version "2.22.2"
+\version "2.24.0"
 \language "english"
 
 \include "global-variables.ily"
@@ -65,7 +65,7 @@ slurShapeE = \shape #'(
                         ()
                         ((0 . 0) (0 . -0.75) (0 . -0.75) (0 . 0))
                       ) \etc
-slurShapeF = \shape #'((0 . 0) (0 . 0) (0 . 0.25) (0 . 1.75)) \etc
+slurShapeF = \shape #'((0 . 0) (0 . -0.5) (0 . -0.25) (0 . 1.75)) \etc
 slurShapeG = \shape #'((0 . 0) (0 . -0.5) (0 . -0.5) (0 . 2.5)) \etc
 slurShapeH = \shape #'(
                         ()
@@ -76,6 +76,8 @@ slurShapeI = \shape #'((0 . 3) (0 . -1) (0 . -1) (0 . 3)) \etc
 slurShapeJ = \shape #'((0 . 3) (0 . 0) (0 . 0) (0 . 3)) \etc
 slurShapeK = \shape #'((0 . 2.5) (0 . -3) (0 . -3) (0 . 0)) \etc
 slurShapeL = \shape #'((-9 . -8) (-6 . 3) (0 . 0) (0.5 . -0.25)) \etc
+slurShapeM = \shape #'((0 . 0) (0 . 0) (0 . 0.5) (0 . 0)) \etc
+
 slurPositionsA = \tweak positions #'(3 . 3) \etc
 
 %%% Music %%%
@@ -125,7 +127,7 @@ rightHandUpper = \relative {
   \barNumberCheck 17
   \oneVoice
   d4 c8. bf16 \grace { a8*1/2[ bf c] } bf8 a) r4 |
-  r8 bf( \grace { bf16[ c] } \tuplet 3/2 { bf8 a g } fs4) r |
+  r8 bf\slurShapeM ( \grace { bf16[ c] } \tuplet 3/2 { bf8 a g } fs4) r |
   g4( a8 bf c4 \moveGraceAOn \grace { c8[ c d c b c] } \moveGraceOff d8. ef16 |
   a,4) a'4.->( g8 \tuplet 3/2 { g8 f ef) } |
   
@@ -160,7 +162,7 @@ rightHandUpper = \relative {
   
   \barNumberCheck 33
   d4 c8. bf16 \grace { a8*1/2[ bf c] } bf8 a) r4 |
-  r8 bf-\slurShapeF ( \grace { bf16*1/2[ c] } \tuplet 3/2 { bf8 a g } fs4) r |
+  r8 bf\slurShapeF ( \grace { bf16*1/2[ c] } \tuplet 3/2 { bf8 a g } fs4) r |
   g4( a8. bf16 c4 d8. ef16 |
   ef8 a,) r a'->~( \magnifyMusic #2/3 { 
     a8*1/4[ gs g fs f e ef c a gf e f g a bf c] } |
@@ -169,7 +171,7 @@ rightHandUpper = \relative {
   \grace { bf,8[-\slurShapeG ^( d g] } bf4~ \tuplet 3/2 { bf8 a g } fs2) |
   \voiceOne
   g4-\slurPositionsA ( a8. bf16 <g c>4 <fs d'> |
-  g2) r | 
+  g2) b\rest | 
   \bar "||" 
   
   \barNumberCheck 41
@@ -184,7 +186,7 @@ rightHandUpper = \relative {
   
   \barNumberCheck 65
   s1 |
-  r4 d'( d d8 d |
+  r4 d( d d8 d |
   \bar "||"
   \key g \minor
   \oneVoice
@@ -519,7 +521,7 @@ leftHandLower = \relative {
   af4 ef <bf bf'> ef |
   bf'4 ef af, ef' |
   bf4 c bf ef,~ |
-  <ef ef'> <af, af'> q ef'\fermata |
+  <ef ef'>4 <af, af'> q ef'\fermata |
   af4 ef bf'~ <ef, bf'>\fermata |
   bf'4 <ef bf'> af, c\fermata |
   <f, c'>4 <c c'> <f c'> <c c'>\fermata |
@@ -712,7 +714,7 @@ pedal = {
   
   \barNumberCheck 65
   s1\sustainOn |
-  s2. s8. s16\sustainOff |
+  s2. s8 s\sustainOff |
   \moveSustainAOn 
   \moveSustainB s2\sustainOn s\sustainOff |
   s1 |

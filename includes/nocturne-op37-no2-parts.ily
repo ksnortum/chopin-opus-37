@@ -95,8 +95,8 @@ rightHandUpper = \relative {
   <gf bf>4) r8 <ef gf>( <d f>16 <ef gf> <f af> <d cf'> |
   <gf bf>16 <bf gf'> <af f'> <f d'> <gf ef'> <af cf>
     <gf bf> <f df'> <ef c'> <df f> <c gf'> <af af'> |
-  <df f>4.) <df f>8( <bf gf'>16 <af f'> <gf ef'> <f d'> |
-  <ef a c>4. \voiceOne <d bf'>8 <ef c'>16 <d bf'> <\single \moveAccidentalB 
+  <df f>4.) <df f>8( <bf gf'>16 <af f'> <gf ef'> <f df'> |
+  <ef a c>4. \voiceOne <df bf'>8 <ef c'>16 <df bf'> <\single \moveAccidentalB
     bf g'> <c a'> |
   <a f'>4) \oneVoice r8 \voiceOne <a' f'>(\> <bf g'>16 <a f'> <g e'> <f d'>\! |
   <e a c>4) \oneVoice r8 r16 \voiceOne <ds b'>16( <e c'> <ds b'> <f d'> 
@@ -1008,7 +1008,7 @@ ossia = \relative {
   s2. * 4
   \startStaff
   << 
-    { s4. f''8 <bf, gf'>16 <af f'> <gf ef'> <f d'> | }
+    { s4. f''8 <bf, gf'>16 <af f'> <gf ef'> <f df'> | }
     \\
     { <df'~ f>4. df4 s8 | }
   >> 

@@ -16,6 +16,9 @@ The PDF produced will have point-and-click info in it, which you may not want (i
 ## Licensing
 This work is licensed under CC BY-SA 4.0. To view a copy of this license, visit [http://creativecommons.org/licenses/by-sa/4.0/](http://creativecommons.org/licenses/by-sa/4.0/).
 
+## Thanks
+Thanks to [phmcarty](https://github.com/phmccarty) for the proofreading.
+
 ## Questions, problems, etc.
 If you have a question about these source files or how to produce a PDF, you can contact me at: **knute (at) snortum (dot) net**
 

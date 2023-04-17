@@ -1,5 +1,5 @@
 # chopin-opus-37
-LilyPond source files for Chopin's Twelve Etudes, Opus 37.
+LilyPond source files for Chopin's Two Nocturnes, Opus 37.
 
 ## Requirements
 LilyPond version 2.24.0 or higher.  It is assumed that `lilypond` is in the PATH of your system.
@@ -7,7 +7,7 @@ LilyPond version 2.24.0 or higher.  It is assumed that `lilypond` is in the PATH
 ## Producing PDFs or other outputs
 You can find the latest release of the PDF and MIDI files [here](https://github.com/ksnortum/chopin-opus-37/releases/latest), otherwise `cd` into your installation directory and type:
 
-        lilypond twelve-etudes-opus37-book.ly
+        lilypond two-nocturnes-op37-book.ly
 
 This should produce a PDF and two MIDI files.
 
